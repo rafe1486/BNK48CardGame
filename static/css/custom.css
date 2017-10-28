@@ -1,3 +1,32 @@
 body{
     background-color: #FFE9E9;
 }
+.navbar{
+    background-color: #C58EC3;
+}
+.bnkLogo{
+    color: #c58ec3;
+    font: "kanit",Thonburi,Arial,sans-serif;
+}
+.dark{
+    background-color: #000;
+}
+.darkpink{
+    background-color: #C58EC3;
+}
+.normalpink{
+    background-color: rgb(255, 214, 226);
+}
+.lightpink{
+    background-color:  #FFE9E9;
+}
+.bnkfont{
+        /* font-family: Kanit; */
+        font-weight: 300;
+        margin: 0 0 10px;
+        line-height: 1.2;
+        color: #333;
+}
+footer{
+    background-color: #c58ec3;
+}

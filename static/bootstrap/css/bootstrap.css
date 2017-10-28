@@ -677,8 +677,6 @@ pre code {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
 }
 
 .no-gutters {
@@ -3602,6 +3600,7 @@ tbody.collapse.show {
   -ms-flex-pack: justify;
       justify-content: space-between;
   padding: 0.5rem 1rem;
+  background-color: #CA95C1;
 }
 
 .navbar > .container,
@@ -3618,8 +3617,6 @@ tbody.collapse.show {
 
 .navbar-brand {
   display: inline-block;
-  padding-top: 0.3125rem;
-  padding-bottom: 0.3125rem;
   margin-right: 1rem;
   font-size: 1.25rem;
   line-height: inherit;
@@ -4503,7 +4500,6 @@ tbody.collapse.show {
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
-  background-color: #e9ecef;
   border-radius: 0.3rem;
 }
 
