@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="components/main">
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<div class="mw-100 mh-100">
+			<div class="container-fluid darkpink">
+				<div class="container justify-content-center darktpink">
+					<div class="row pt-4 justify-content-center">
+
+						<br />
+						<div class="col-sm-2">
+							<h1 class="display-3 pt-1 pl-1 pr-5 pb-5 bnklogo">
+								BNK <br />48
+							</h1>
+						</div>
+						<div class="col-sm-4 display-4 bnklogofont align-self-center">
+							COLLECTION <br /> CARD GAME
+						</div>
+					</div>
+
+					<div class="row justify-content-center">
+						<br /> <img src="/img/domain-header.ce64f8f.png"
+							class="img-fluid" alt="" />
+
+					</div>
+				</div>
+			</div>
+			<div class="row normalpink">
+				<div class="container">
+					<div class="row pt-5 justify-content-between">
+						<div class="col-sm-6">
+							<h1 class="bnkfont">What's BNK Card Game ?</h1>
+							<hr />
+							<p>Game for trade and collect limited collection card of
+								BNK48</p>
+							<br />
+							<div class="row justify-content-start">
+								<div class="col-sm-2 p-1">
+									<div class="card" style="width: 10rem;">
+										<img class="card-img-top" src="/card/CHERPRANG007.tex.jpg"
+											alt="Card image cap" />
+									</div>
+								</div>
+								<div class="col-sm-2 p-1">
+									<div class="card" style="width: 10rem;">
+										<img class="card-img-top" src="/card/CHERPRANG009.tex.jpg"
+											alt="Card image cap" />
+									</div>
+								</div>
+								<div class="col-sm-2 p-1">
+									<div class="card" style="width: 10rem;">
+										<img class="card-img-top" src="/card/CHERPRANG010.tex.jpg"
+											alt="Card image cap" />
+									</div>
+								</div>
+								<div class="col-sm-2 p-1">
+									<div class="card" style="width: 10rem;">
+										<img class="card-img-top" src="/card/CHERPRANG012.tex.jpg"
+											alt="Card image cap" />
+									</div>
+								</div>
+								<div class="col-sm-2 p-1">
+									<div class="card" style="width: 10rem;">
+										<img class="card-img-top" src="/card/CHERPRANG011.tex.jpg"
+											alt="Card image cap" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<img src="/img/file-cdc7ed57db9a177bda438b0947a6ce82.png"
+								class="img-fluid" alt="" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row lightpink">
+				<div class="container">
+					<div class="row pt-5 justify-content-between">
+						<div class="col-sm-6">
+							<img src="/img/file-093f5ac23cf89ec6521e8eda2946816b.png"
+								class="img-fluid" alt="" />
+						</div>
+						<div class="col-sm-6">
+							<h1 class="bnkfont">How to Play</h1>
+							<hr />
+							<ul>
+								<li>Login</li>
+								<li>Open Card (limit one card per one day)</li>
+								<li>Exchange your Card with other people to get other card</li>
+							</ul>
+							<div class="row justify-content-start">
+								<div class="col-sm-2 p-1">
+									<div class="card" style="width: 10rem;">
+										<img class="card-img-top" src="/card/CAN001.tex.jpg"
+											alt="Card image cap" />
+									</div>
+								</div>
+								<div class="col-sm-2 p-1">
+									<div class="card" style="width: 10rem;">
+										<img class="card-img-top" src="/card/CAN002.tex.jpg"
+											alt="Card image cap" />
+									</div>
+								</div>
+								<div class="col-sm-2 p-1">
+									<div class="card" style="width: 10rem;">
+										<img class="card-img-top" src="/card/CAN006.tex.jpg"
+											alt="Card image cap" />
+									</div>
+								</div>
+								<div class="col-sm-2 p-1">
+									<div class="card" style="width: 10rem;">
+										<img class="card-img-top" src="/card/CAN005.tex.jpg"
+											alt="Card image cap" />
+									</div>
+								</div>
+								<div class="col-sm-2 p-1">
+									<div class="card" style="width: 10rem;">
+										<img class="card-img-top" src="/card/CAN004.tex.jpg"
+											alt="Card image cap" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row darkpink" id="register">
+				<div class="container">
+					<div class="row pt-5 justify-content-between">
+						<div class="col-sm-6">
+							<h1 class="bnkfont display3">Register</h1>
+							<hr />
+							<form th:action="@{/register}" th:object="${RegisterForm}" method="post">
+								<div class="form-group">
+									<label for="email">Email address</label> <input type="email"
+										class="form-control" name="email" placeholder="Enter email" />
+								</div>
+								<div class="form-group">
+									<label for="Password">Password</label> <input type="password"
+										class="form-control" name="password" placeholder="Password" />
+								</div>
+								<div class="form-group">
+									<label for="name">Name</label> <input type="text"
+										class="form-control" name="name" placeholder="Enter name" />
+								</div>
+								<button type="submit" class="btn btn-pink">Register</button>
+							</form>
+						</div>
+						<div class="col-sm-6">
+							<img src="/img/file-f160a71d405e9f0d4bd5215bb9618e16.png"
+								class="img-fluid" alt="" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row justify-content-center pt-2 normalpink">
+			<h2 class="bnkfont">Subscribe BNK48</h2>
+		</div>
+		<div class="row justify-content-center normalpink">
+			<img src="/img/bn-bnk48-yt.2c3b886.jpg" alt="" class="img-fluid m-3" />
+			<img src="/img/bn-bnk48-fb.4d3acce.jpg" alt="" class="img-fluid m-3" />
+		</div>
+	</div>
+</body>
+</html>
