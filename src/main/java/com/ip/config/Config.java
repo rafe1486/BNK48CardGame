@@ -34,8 +34,11 @@ public class Config extends WebSecurityConfigurerAdapter {
 				.permitAll().and().authorizeRequests()
 				.antMatchers("/","/register").permitAll()
 				.anyRequest().authenticated().and().csrf().disable().formLogin().loginPage("/")
-				.defaultSuccessUrl("/main", true).failureUrl("/").usernameParameter("email")
+				.defaultSuccessUrl("/main", true).failureUrl("/fail").usernameParameter("email")
 				.passwordParameter("password").permitAll().and().logout().logoutUrl("/logout")
 				.logoutSuccessUrl("/").logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
+	
+
+	
 }

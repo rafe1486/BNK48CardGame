@@ -18,6 +18,8 @@ public class User {
 	private String name;
 	private String email;
 	private String password;
+	private String role;
+	private String profile;
 	private List<MyCard> card;
 	private List<TradeCard> tradeCard;
 	
@@ -30,6 +32,15 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	@Basic
+	@Column(name = "role")
+	public String getRole() {
+		return role+"";
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	
 	@Basic
 	@Column(name = "name")
@@ -38,6 +49,15 @@ public class User {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@Basic
+	@Column(name = "profile")
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String name) {
+		this.profile = name;
 	}
 	
 	@Basic
@@ -58,6 +78,8 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
 	
 	@OneToMany(mappedBy="card", cascade = CascadeType.ALL)
 	public List<MyCard> getCard() {

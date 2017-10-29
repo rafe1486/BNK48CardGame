@@ -9,18 +9,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.ip.component.MD5Encoder;
 import com.ip.entity.User;
+import com.ip.form.Profileform;
 import com.ip.form.RegisterForm;
 import com.ip.repository.UserRepository;
 
-@Component
-public class MainService {
+@Service
+public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
@@ -37,9 +38,6 @@ public class MainService {
 				return user.getId();
 		}
 	}
-	
-	@Autowired
-	MD5Encoder MD5Encoder;
 
 	public void createUser(RegisterForm registerForm) throws NoSuchAlgorithmException {
 		User user = new User();
@@ -57,12 +55,12 @@ public class MainService {
 		return userRepository.findAll(pageable);
 	}
 
-	public User findOne(int userId) {
-		return userRepository.findOne(userId);
+	public User findOne(int id) {
+		return userRepository.findOne(id);
 	}
 
-	public void deleteUser(int userId) {
-		userRepository.delete(userId);
+	public void deleteUser(int id) {
+		userRepository.delete(id);
 	}
 	
 	public User find(Principal principal) {
@@ -73,6 +71,24 @@ public class MainService {
 			UserDetails userDetails = (UserDetails) auth.getPrincipal();
 			return userRepository.findOneByEmail(userDetails.getUsername());
 		}
+	}
+	
+	public Profileform setUserEditForm(int id) {
+		User user = userRepository.findOne(id);
+		Profileform profileEditForm = new Profileform();
+		profileEditForm.setId(user.getId());
+		profileEditForm.setName(user.getName());
+		profileEditForm.setEmail(user.getEmail());
+		profileEditForm.setProfile(user.getProfile());
+		return profileEditForm;
+	}
+
+	public void updateUser(Profileform profileEditForm) throws NoSuchAlgorithmException {
+		User user = userRepository.findOne(profileEditForm.getId());
+		user.setName(profileEditForm.getName());
+		user.setPassword(MD5Encoder.hashMD5(profileEditForm.getPassword()));
+		user.setProfile(profileEditForm.getProfile());
+		userRepository.save(user);
 	}
 
 }

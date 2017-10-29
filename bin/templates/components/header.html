@@ -10,7 +10,7 @@
 		<nav
 			class="navbar navbar-dark navbar-expand-md justify-content-between">
 			<div class="container">
-				<a class="navbar-brand" href="#"> <img src="/img/logo-bnk48.png"
+				<a class="navbar-brand" th:href="${Login}? '/main':'/'"> <img src="/img/logo-bnk48.png"
 					alt="BNK48" />
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -21,33 +21,38 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav mr-auto">
-						<a class="nav-item nav-link" href="#Register">Register</a>
+						<a th:unless="${Login}" class="nav-item nav-link" href="#Register">Register</a>
 					</div>
-						<div th:if="${Login}" class="navbar-nav">
-							<div class="navbar-nav mr-auto">
-								<a class="nav-item nav-link active" href="/main">Profile <span class="sr-only">(current)</span>
-								</a> 
-								<a class="nav-item nav-link" href="/openCard">Find Card</a>
-								<a class="nav-item nav-link" href="/tradeCard">Trade Card</a>
-								<a class="nav-item nav-link" href="/logout">Logout</a>
-							</div>
+					<div th:if="${Login}" class="navbar-nav">
+						<div class="navbar-nav mr-auto">
+							<a class="nav-item nav-link active" href="/main">Profile <span
+								class="sr-only">(current)</span>
+								
+							</a> <a class="nav-item nav-link" href="/list" th:if="${LoginDetail.role}=='Admin'">User List
+							</a> <a class="nav-item nav-link" href="/openCard">Find Card</a> <a
+								class="nav-item nav-link" href="/tradeCard">Trade Card</a> <a
+								class="nav-item nav-link" href="/logout">Logout</a>
+								
 						</div>
-						<div th:unless="${Login}" class="navbar-nav">
-							<div style="color: #a94442" class="help-block"
-								th:if="${param.error}">
-								<span>Invalid username or password.</span>
-							</div>
-							<form class="form-inline" th:action="@{/}"
-								th:object="${LoginForm}" method="post">
-								<input class="form-control mr-sm-2" type="text"
-									placeholder="E-mail" aria-label="Search" name="email" /> <input
-									class="form-control mr-sm-2" type="password"
-									placeholder="Password" aria-label="password" name="password" />
-								<button class="btn btn-outline-pink my-2 my-sm-0" type="submit">Login</button>
-							</form>
-						</div>
+						
+					</div>
+					<div th:unless="${Login}" class="navbar-nav">
+						<form class="form-inline" th:action="@{/}"
+							th:object="${LoginForm}" method="post">
+							<div th:if="${LoginFail}" class="navbar-nav invalid-feedback bold"> Invalid username or password. &nbsp;</div>
+							<input class="form-control mr-sm-2"
+								th:classappend="${LoginFail} ? is-invalid :''" type="text"
+								placeholder="E-mail" aria-label="Search" name="email" /> 
+							<input
+								class="form-control mr-sm-2" type="password"
+								th:classappend="${LoginFail} ? is-invalid :''"
+								placeholder="Password" aria-label="password" name="password" />
+							
+							<button class="btn my-2 my-sm-0" th:classappend="${LoginFail} ? 'btn-outline-danger' :'btn-outline-pink'" type="submit">Login</button>
+						</form>
 					</div>
 				</div>
+			</div>
 		</nav>
 	</header>
 </body>

@@ -12,6 +12,9 @@ import com.ip.entity.User;
 import com.ip.repository.UserRepository;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class MyUserDetailsImpl implements UserDetailsService {
@@ -21,14 +24,17 @@ public class MyUserDetailsImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		User user = userRepository.findOneByEmail(email);
-		GrantedAuthority auth = new SimpleGrantedAuthority("bnk48cardgame");
 		boolean isEnabled = true;
 		boolean isAccountNonExpired = true;
 		boolean isCredentialsNonExpired = true;
 		boolean isAccountNonLocked = true;
 		UserDetails  LoginDetail = (UserDetails) new org.springframework.security.core.userdetails.User(user.getEmail(),
 				user.getPassword(), isEnabled, isAccountNonExpired, isCredentialsNonExpired, isAccountNonLocked,
-				Arrays.asList(auth));
+				Arrays.asList(new SimpleGrantedAuthority(user.getRole())));
+		System.out.print(LoginDetail);
 		return LoginDetail;
 	}
+	
+	
+	
 }
