@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="components/main">
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<div class="mw-100 mh-100">
+			<div class="container-fluid darkpink">
+				<div class="container justify-content-center darktpink">
+					<div class="row pt-4 justify-content-center">
+						<h4 class="bnkfont">User Managemet</h4>
+					</div>
+					<hr />
+					<div class="row pt-4 justify-content-center">
+						<table class="table table-hover  bnkfont">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Name</th>
+									<th scope="col">E-mail</th>
+									<th scope="col">Profile</th>
+									<th scope="col">Manage</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="table-light" th:each="user, stat : ${list}">
+									<th scope="row" th:text="${user.id}">1</th>
+									<td th:text="${user.name}">name</td>
+									<td th:text="${user.email}">email</td>
+									<td th:text="${user.profile}">profile</td>
+									<td><a th:href="'edit/' + ${user.id}"> <span
+											class="badge badge-warning p-1"><i
+												class="fa fa-pencil" aria-hidden="true"></i> Edit</span>
+									</a> <a th:href="'delete/' + ${user.id}"
+										onclick="return confirm('Are you sure to delete ${user.name}?')">
+											<span class="badge badge-danger p-1"><i
+												class="fa fa-trash" aria-hidden="true"></i> Delete</span>
+									</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="row justify-content-center" th:fragment="paginationbar">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+							<li class="page-item" th:classappend="${page.firstPage}?'disabled':''">
+								<span class="page-link"   th:if='${page.firstPage}'><i class="fa fa-angle-double-left" aria-hidden="true"></i></span> 
+								<a class="page-link"  tabindex="-1" th:if='${not page.firstPage}' th:href='@{${page.url}(page=0,size=${page.size})}'><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+							</li>
+							<li class="page-item" th:classappend="${page.hasPreviousPage}? '' : 'disabled'">
+								<span class="page-link" th:if='${not page.hasPreviousPage}'><i class="fa fa-angle-left" aria-hidden="true"></i></span> 
+								<a class="page-link" th:if='${page.hasPreviousPage}' th:href='@{${page.url}(page=${page.number-2},size=${page.size})}'><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+							</li>
+							<li class="page-item" th:each='item : ${page.items}' th:classappend="${item.current}? 'active' : ''">
+								<span class="page-link" th:if='${item.current}' th:text='${item.number}'>number</span> 
+								<a class="page-link" th:if='${not item.current}' th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'>
+									<span th:text='${item.number}'>number</span>
+								</a>
+							</li>
+							
+							<li class="page-item" th:classappend="${page.hasNextPage}? '' : 'disabled'">
+								<span class="page-link" th:if='${not page.hasNextPage}'><i class="fa fa-angle-right" aria-hidden="true"></i> </span>
+								<a class="page-link" th:if='${page.hasNextPage}' th:href='@{${page.url}(page=${page.number},size=${page.size})}'>
+									<span><i class="fa fa-angle-right" aria-hidden="true"></i> </span>
+								</a>
+							</li>
+							<li class="page-item" th:classappend="${page.lastPage}? 'disabled' : ''">
+								<span class="page-link" th:if='${page.lastPage}'><i class="fa fa-angle-double-right" aria-hidden="true"></i> </span>
+								<a class="page-link" th:if='${not page.lastPage}' th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'><i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+							</li>
+
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<div class="row justify-content-center pt-2 normalpink">
+			<h2 class="bnkfont">Subscribe BNK48</h2>
+		</div>
+		<div class="row justify-content-center normalpink">
+			<img src="/img/bn-bnk48-yt.2c3b886.jpg" alt="" class="img-fluid m-3" />
+			<img src="/img/bn-bnk48-fb.4d3acce.jpg" alt="" class="img-fluid m-3" />
+		</div>
+	</div>
+</body>
+</html>
