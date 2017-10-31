@@ -99,7 +99,11 @@ public class UserService {
 
 	public void promoteUser(int id) {
 		User user = userRepository.findOne(id);
+		if(user.getRole().compareTo("Admin") == 0) {
+			user.setRole("User");
+		}else if (user.getRole().compareTo("User") == 0) {
 		user.setRole("Admin");
+		}
 		userRepository.save(user);
 	}
 

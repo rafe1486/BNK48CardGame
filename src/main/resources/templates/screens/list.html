@@ -32,9 +32,11 @@
 									<td th:text="${user.profile}">profile</td>
 									<td th:text="${user.role}">role</td>
 									<td>
-									<a th:if="${LoginDetail.id != user.id}" th:href="'promote/' + ${user.id}"> <span
-											class="badge badge-success p-1"><i
+									<a th:if="${LoginDetail.id != user.id}" th:href="'promote/' + ${user.id}"> 
+									<span th:if="${user.role != 'Admin'}" class="badge badge-success p-1"><i
 												class="fa fa-star" aria-hidden="true"></i> Promote</span>
+									<span th:if="${user.role == 'Admin'}" class="badge badge-secondary p-1"><i
+												class="fa fa-star" aria-hidden="true"></i> Demote</span>
 									</a>
 									<a th:href="'edit/' + ${user.id}"> <span
 											class="badge badge-warning p-1"><i
