@@ -14,7 +14,7 @@ public class TradeCard {
 
 	private int id;
 	private User user_send;
-	private User user_recieved;
+	private User user_received;
 	private Card card;
 	private Date date;
 	private int status;
@@ -41,13 +41,13 @@ public class TradeCard {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "user_recieved", insertable = false, updatable = false)
-	public User getUser_recieved() {
-		return user_recieved;
+	@JoinColumn(name = "user_received", insertable = false, updatable = false)
+	public User getUser_received() {
+		return user_received;
 	}
 
-	public void setUser_recieved(User user_recieved) {
-		this.user_recieved = user_recieved;
+	public void setUser_received(User user_received) {
+		this.user_received = user_received;
 	}
 
 	@Basic

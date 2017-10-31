@@ -77,17 +77,29 @@ public class UserService {
 		User user = userRepository.findOne(id);
 		Profileform profileEditForm = new Profileform();
 		profileEditForm.setId(user.getId());
+		profileEditForm.setPassword(user.getPassword());
 		profileEditForm.setName(user.getName());
 		profileEditForm.setEmail(user.getEmail());
 		profileEditForm.setProfile(user.getProfile());
+		System.out.println(profileEditForm.getPassword());
 		return profileEditForm;
 	}
 
 	public void updateUser(Profileform profileEditForm) throws NoSuchAlgorithmException {
 		User user = userRepository.findOne(profileEditForm.getId());
 		user.setName(profileEditForm.getName());
-		user.setPassword(MD5Encoder.hashMD5(profileEditForm.getPassword()));
+		if(profileEditForm.getPassword().compareTo("") == 0){
+			
+		}else {
+			user.setPassword(MD5Encoder.hashMD5(profileEditForm.getPassword()));
+		}
 		user.setProfile(profileEditForm.getProfile());
+		userRepository.save(user);
+	}
+
+	public void promoteUser(int id) {
+		User user = userRepository.findOne(id);
+		user.setRole("Admin");
 		userRepository.save(user);
 	}
 

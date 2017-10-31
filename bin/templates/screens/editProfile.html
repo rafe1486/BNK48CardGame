@@ -12,27 +12,30 @@
 						<div class="col-sm-6">
 							<h1 class="bnkfont display3">Edit Profile</h1>
 							<hr />
-							<form th:action="@{/editProfile}" th:object="${ProfileForm}" method="post">
+							<form th:action="@{/update}" th:object="${ProfileForm}" method="post"  role="form">
 								<div class="form-group">
 									<label for="email">Email address</label> <input type="email"
-										class="form-control" name="email" placeholder="Enter email" />
+										class="form-control" name="email" placeholder="Enter email" th:field="*{Email}" readonly="readonly"/>
 								</div>
+								<input type="hidden" name="id" th:field="*{Id}" />
 								<div class="form-group">
 									<label for="Password">Password</label> <input type="password"
-										class="form-control" name="password" placeholder="Password" />
+										class="form-control" name="password" placeholder="Enter new Password" th:field="*{Password}" />
 								</div>
 								<div class="form-group">
 									<label for="name">Name</label> <input type="text"
-										class="form-control" name="name" placeholder="Enter name" />
+										class="form-control" name="name" placeholder="Enter name" th:field="*{Name}"/>
 								</div>
 								<div class="form-group">
-									<label for="name">Name</label> 
-									<textarea name="profile"></textarea>
+									<label for="profile">Profile Description</label> 
+									<textarea name="profile" class="form-control"  th:field="*{Profile}">Your Profile Description</textarea>
 								</div>
 								<button type="submit" class="btn btn-pink">Edit</button>
+								
 							</form>
+							<br />
 						</div>
-						<div class="col-sm-6">
+						<div class="col-sm-6 d-flex align-items-end">
 							<img src="/img/file-f160a71d405e9f0d4bd5215bb9618e16.png"
 								class="img-fluid" alt="" />
 						</div>

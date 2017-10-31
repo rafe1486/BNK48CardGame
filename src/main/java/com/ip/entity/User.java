@@ -21,7 +21,8 @@ public class User {
 	private String role;
 	private String profile;
 	private List<MyCard> card;
-	private List<TradeCard> tradeCard;
+	private List<TradeCard> tradeCardSend;
+	private List<TradeCard> tradeCardReceived;
 	
 	@Id
 	@GeneratedValue
@@ -89,13 +90,23 @@ public class User {
 		this.card = card;
 	}
 	
-	@OneToMany(mappedBy="user_recieved", cascade = CascadeType.ALL)
-	public List<TradeCard> getTradeCard() {
-		return tradeCard;
+	@OneToMany(mappedBy="user_received", cascade = CascadeType.ALL)
+	public List<TradeCard> getTradeCardReceived() {
+		return tradeCardReceived;
 	}
-	public void setTradeCard(List<TradeCard> tradeCard) {
-		this.tradeCard = tradeCard;
+	public void setTradeCardReceived(List<TradeCard> tradeCardReceived) {
+		this.tradeCardReceived = tradeCardReceived;
 	}
+	
+	@OneToMany(mappedBy="user_send", cascade = CascadeType.ALL)
+	public List<TradeCard> getTradeCardSend() {
+		return tradeCardSend;
+	}
+	public void setTradeCardSend(List<TradeCard> tradeCardSend) {
+		this.tradeCardSend = tradeCardSend;
+	}
+	
+	
 	
 	
 }

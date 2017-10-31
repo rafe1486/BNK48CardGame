@@ -41,7 +41,7 @@ public class UserController {
 		Authentication auth = (Authentication) principal;
 		UserDetails userDetails = (UserDetails) auth.getPrincipal();
 		User user = userservice.find(principal);
-		modelAndView.addObject("userEditForm", userservice.setUserEditForm(user.getId()));
+		modelAndView.addObject("ProfileForm", userservice.setUserEditForm(user.getId()));
 		modelAndView.setViewName("screens/editProfile");
 		return modelAndView;
 	}
@@ -50,7 +50,7 @@ public class UserController {
 	@RequestMapping(value = "/edit/{id}")
 	public ModelAndView edit(@PathVariable int id, ModelAndView modelAndView, Principal principal) {
 		modelAndView.addObject("user", userservice.findOne(id));
-		modelAndView.addObject("userEditForm", userservice.setUserEditForm(id));
+		modelAndView.addObject("ProfileForm", userservice.setUserEditForm(id));
 		modelAndView.setViewName("screens/editProfile");
 		return modelAndView;
 	}
@@ -59,13 +59,22 @@ public class UserController {
 	public Object update(@Validated Profileform profileForm, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes, ModelAndView modelAndView, Principal principal)
 			throws NoSuchAlgorithmException {
+		Authentication auth = (Authentication) principal;
+		User user = userservice.find(principal);
 		if (bindingResult.hasErrors()) {
-			modelAndView.addObject("user", userservice.findOne(profileForm.getId()));
+			modelAndView.addObject("user", userservice.findOne(user.getId()));
 			modelAndView.setViewName("screens/editProfile");
 			return modelAndView;
 		}
 		userservice.updateUser(profileForm);
 		return "redirect:/";
+	}
+	
+	@PreAuthorize("hasAuthority('Admin')")
+	@RequestMapping("/promote/{id}")
+	public String promote(@PathVariable int id, ModelAndView modelAndView, Principal principal,RedirectAttributes redirectAttributes) {
+		userservice.promoteUser(id);
+		return "redirect:/list";
 	}
 
 	@PreAuthorize("hasAuthority('Admin')")
@@ -83,8 +92,8 @@ public class UserController {
 	@PreAuthorize("hasAuthority('Admin')")
 	@RequestMapping("/delete/{id}")
 	public String deleteProfile(@PathVariable int id,ModelAndView modelAndView, Principal principal,RedirectAttributes redirectAttributes) {
+		System.out.println(id);
 		userservice.deleteUser(id);
-		redirectAttributes.addFlashAttribute("msg", "deleted");
 		return "redirect:/list";
 	}
 	
